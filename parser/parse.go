@@ -534,6 +534,7 @@ func (b *Builder) findTypesIn(pkgPath importPathString, u *types.Universe) error
 		tf, ok := obj.(*tc.Func)
 		// We only care about functions, not concrete/abstract methods.
 		if ok && tf.Type() != nil && tf.Type().(*tc.Signature).Recv() == nil {
+			klog.Infof("------add func %s", tf.String())
 			t := b.addFunction(*u, nil, tf)
 			c1 := b.priorCommentLines(obj.Pos(), 1)
 			// c1.Text() is safe if c1 is nil
